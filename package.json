@@ -1,0 +1,25 @@
+{
+  "name": "connect-device-router",
+  "version": "0.0.0",
+  "description": "Connect middleware to route based on X-UA-Device",
+  "author": "Good Eggs <open-source@goodeggs.com>",
+  "contributors": [
+    "Adam Hull <adam@hmlad.com>"
+  ],
+  "main": "connect_device_router",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/goodeggs/connect-device-router.git"
+  },
+  "homepage": "https://github.com/goodeggs/connect-device-router",
+  "bugs": "https://github.com/goodeggs/connect-device-router/issues",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "coffee-script": ">=1.7.x",
+    "mocha": "~1.x.x"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
