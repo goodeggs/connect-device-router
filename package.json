@@ -1,6 +1,6 @@
 {
   "name": "connect-device-router",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Connect middleware to route based on X-UA-Device",
   "author": "Good Eggs <open-source@goodeggs.com>",
   "contributors": [
