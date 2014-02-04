@@ -7,6 +7,7 @@ describe 'connect-device-router', ->
     .use (req, res, next) ->
       res.setHeader 'Vary', 'Accept-Encoding'
       next()
+    .use connect.query()
     .use deviceRouter
       phone: (req, res) ->
         res.end 'phone'
@@ -27,3 +28,15 @@ describe 'connect-device-router', ->
       request.get('/')
         .set('X-UA-Device', 'phone')
         .expect(200, 'phone', done)
+
+  describe 'a request with an undeclared X-UA-Device header', ->
+    it 'falls through', (done) ->
+      request.get('/')
+        .set('X-UA-Device', 'laptop')
+        .expect(200, 'desktop', done)
+
+  describe 'a request with a device querystring', ->
+    it 'overrides the header', (done) ->
+      request.get('/?device=tablet')
+        .set('X-UA-Device', 'phone')
+        .expect(200, 'tablet', done)
