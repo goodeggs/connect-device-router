@@ -5,7 +5,7 @@ deploy:
   provider: npm
   email: open-source@goodeggs.com
   api_key:
-    secure: NtaWI8x9nz7aYnUn0+N9RnjDDBPP3gaX0hQFScyuhNJV/SaI7xsgPEi/xqbx+gjZE/xWWRzN8imEB6wtUQsGyBMnqYcCiWXIAtNqJdS/boVZ38tC+wb8c8tmSXPjTrTyFNOESbotxMz0piLQcMDpP4TXG4g2hDQAbWHVLwZ0dD4=
+    secure: CeX8/2tWlvysPbJ1Ecjq/jZjfRTO/EOUmOgDL8meOE+IToyayhsHap/pz2pvv+S2+oVETn1A5KRmKeYJuiLMToMYv9+DXqd5itH0bvrF58rmoY3S55WeePUNkDt1QhJ/4U5GPFvpK0YUOrJCrS4OGhSu2Xa0NB6goRTrFAub4q8=
   on:
     tags: true
     repo: goodeggs/connect-device-router
