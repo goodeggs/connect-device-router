@@ -18,9 +18,10 @@
     "coffee-script": ">=1.7.x",
     "mocha": "~1.x.x",
     "supertest": "~0.9.0",
-    "connect": "~2.12.0"
+    "connect": "~2.12.0",
+    "jshint": "~2.4.3"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "jshint *.js && mocha"
   }
 }
