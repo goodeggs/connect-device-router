@@ -4,6 +4,9 @@ supertest = require 'supertest'
 
 describe 'connect-device-router', ->
   app = connect()
+    .use (req, res, next) ->
+      res.setHeader 'Vary', 'Accept-Encoding'
+      next()
     .use deviceRouter
       phone: (req, res) ->
         res.end 'phone'
@@ -14,7 +17,10 @@ describe 'connect-device-router', ->
 
   request = supertest app
 
-  xit 'adds Vary: X-UA-Device', ->
+  it 'adds Vary: X-UA-Device', (done) ->
+    request.get('/')
+      .expect('Vary', 'Accept-Encoding, X-UA-Device')
+      .end(done)
 
   describe 'a request with an expected X-UA-Device header', ->
     it 'is routed to the configured middleware', (done) ->
