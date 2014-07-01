@@ -27,3 +27,18 @@ app = connect()
   .use(desktopApp)
 
 ```
+
+Or use per-route with express:
+
+``` coffee
+express = require 'express'
+
+express()
+  .get '/', deviceRouter
+    phone: (req, res, next) -> # ...
+    tablet: (req, res, next) -> # ...
+  , (req, res, next) -> # default ...
+  .get '/foo', deviceRouter
+    desktop: (req, res, next) -> # ...
+    phone: (req, res, next) -> # ...
+```

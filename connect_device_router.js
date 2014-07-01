@@ -6,20 +6,24 @@ function varyOnDevice (res) {
   res.setHeader('vary', varyHeaders.join(', '));
 }
 
+function normalizeDevice (req) {
+  var query = req.query && req.query.device,
+      header = req.headers['x-ua-device'];
+
+  return query || header || 'unspecified';
+}
+
 module.exports = function(deviceToAppMapping) {
   return function(req, res, next) {
-    var app, device;
+    var app;
 
-    varyOnDevice(res);
-
-    device = req.headers['x-ua-device'];
-
-    if (req.query && req.query.device) {
-      device = req.query.device;
+    // Only add vary the first time
+    if (!req.device) {
+      req.device = normalizeDevice(req);
+      varyOnDevice(res);
     }
 
-    app = deviceToAppMapping[device];
-
+    app = deviceToAppMapping[req.device];
     if (app) {
       return app(req, res, next);
     } else {

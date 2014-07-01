@@ -1,6 +1,7 @@
 deviceRouter = require '..'
 connect = require 'connect'
 supertest = require 'supertest'
+assert = require 'assert'
 
 describe 'connect-device-router', ->
   app = connect()
@@ -10,15 +11,20 @@ describe 'connect-device-router', ->
     .use connect.query()
     .use deviceRouter
       phone: (req, res) ->
+        assert.equal(req.device, 'phone')
         res.end 'phone'
       tablet: (req, res) ->
         res.end 'tablet'
+    .use deviceRouter
+      desktop: (req, res) ->
+        assert.equal(req.device, 'desktop')
+        res.end 'desktop'
     .use (req, res) ->
-      res.end 'desktop'
+      res.end 'fell through'
 
   request = supertest app
 
-  it 'adds Vary: X-UA-Device', (done) ->
+  it 'adds Vary: X-UA-Device once', (done) ->
     request.get('/')
       .expect('Vary', 'Accept-Encoding, X-UA-Device')
       .end(done)
@@ -33,7 +39,7 @@ describe 'connect-device-router', ->
     it 'falls through', (done) ->
       request.get('/')
         .set('X-UA-Device', 'laptop')
-        .expect(200, 'desktop', done)
+        .expect(200, 'fell through', done)
 
   describe 'a request with a device querystring', ->
     it 'overrides the header', (done) ->
