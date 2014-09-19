@@ -13,7 +13,14 @@ function normalizeDevice (req) {
   return query || header || 'unspecified';
 }
 
-module.exports = function(deviceToAppMapping) {
+module.exports = function(deviceToAppMapping, handler) {
+  // Transform chaining signature to configuration object
+  if (typeof deviceToAppMapping === 'string') {
+    deviceType = deviceToAppMapping;
+    deviceToAppMapping = {};
+    deviceToAppMapping[deviceType] = handler;
+  }
+
   return function(req, res, next) {
     var app;
 

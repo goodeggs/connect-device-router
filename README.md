@@ -10,7 +10,7 @@ Querystring overrides require `connect.query` or similar.
 ```coffee
 connect = require 'connect'
 deviceDetect = require 'connect-devicedetect'
-deviceRouter = require 'connect-device-router'
+device = require 'connect-device-router'
 
 desktopApp = connect()
   .use( ... )
@@ -21,9 +21,7 @@ mobileApp = connect()
 app = connect()
   .use(connect.query())
   .use(deviceDetect())
-  .use(deviceRouter(
-    phone: mobileApp
-  ))
+  .use(device(phone: mobileApp))
   .use(desktopApp)
 
 ```
@@ -32,13 +30,31 @@ Or use per-route with express:
 
 ``` coffee
 express = require 'express'
+deviceRouter = require 'connect-device-router'
 
 express()
-  .get '/', deviceRouter
+  # map devices to handlers with chained middleware:
+  .get '/foo',
+    device 'phone', (req, res, next) ->
+      # ...
+    device 'desktop', (req, res, next) ->
+      # ...
+    (req, res, next) ->
+      # default
+
+  # or an object literal:
+  .get '/', device
     phone: (req, res, next) -> # ...
     tablet: (req, res, next) -> # ...
   , (req, res, next) -> # default ...
-  .get '/foo', deviceRouter
-    desktop: (req, res, next) -> # ...
-    phone: (req, res, next) -> # ...
+
+  # or mix both styles:
+  .get '/',
+    device phone: (req, res, next) ->
+      # ...
+    device tablet: (req, res, next) ->
+      # ...
+    (req, res, next) ->
+      # default ...
+
 ```
