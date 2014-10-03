@@ -7,6 +7,8 @@ Use with [varnish-devicedetect](https://github.com/varnish/varnish-devicedetect/
 
 Querystring overrides require `connect.query` or similar.
 
+Read about how we use it [here](http://bites.goodeggs.com/posts/speed-up-your-responsive-app-with-node-and-varnish/).
+
 ```coffee
 connect = require 'connect'
 deviceDetect = require 'connect-devicedetect'
