@@ -1,11 +1,3 @@
 language: node_js
 node_js:
 - '0.10'
-deploy:
-  provider: npm
-  email: open-source@goodeggs.com
-  api_key:
-    secure: CeX8/2tWlvysPbJ1Ecjq/jZjfRTO/EOUmOgDL8meOE+IToyayhsHap/pz2pvv+S2+oVETn1A5KRmKeYJuiLMToMYv9+DXqd5itH0bvrF58rmoY3S55WeePUNkDt1QhJ/4U5GPFvpK0YUOrJCrS4OGhSu2Xa0NB6goRTrFAub4q8=
-  on:
-    tags: true
-    repo: goodeggs/connect-device-router
